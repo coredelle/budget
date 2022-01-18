@@ -1,5 +1,6 @@
 import Container from "react-bootstrap/Container";
 import { Button, Stack } from "react-bootstrap";
+import BudgetCard from "./components/BudgetCard";
 
 function App() {
   return (
