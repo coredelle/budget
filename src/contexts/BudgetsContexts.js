@@ -34,6 +34,9 @@ export const BudgetsProvider = ({ children }) => {
     }
     function addBudget({name, max}) {
         setBudgets(prevBudgets => {
+            if (prevBudgets.find(budget => budget.name === name)) {
+                return prevBudgets;
+            };
             return [...prevBudgets, { id: uuidV4(), name, max}]
         });
     }
