@@ -3,7 +3,9 @@ import { v4 as uuidV4 } from 'uuid';
 import useLocalStorage from "../hooks/useLocalStorage";
 
 // context helps pass info easily
-const BudgetsContext = React.createContext();
+const BudgetsContext = React.createContext(undefined);
+
+export const UNCATEGORIZED_BUDGET_ID = 'Uncategorized';
 
 export function useBudgets() {
     return useContext(BudgetsContext);
