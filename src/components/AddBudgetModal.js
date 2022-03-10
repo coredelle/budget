@@ -1,4 +1,4 @@
-import {Button, Form, Modal} from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 export default function AddBudgetModal({ show, handleClose }) {
     function handleSubmit(e){};

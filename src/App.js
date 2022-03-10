@@ -6,7 +6,7 @@ import AddBudgetModal from "./components/AddBudgetModal";
 function App() {
   return (
     <>
-        // my gives mergin at top and bottom of page
+        {/*my gives mergin at top and bottom of page*/}
         <Container className='my-4'>
             {/*gap is the space between elements, mb is margin bottom*/}
           <Stack direction='horizontal' gap='2' className='mb-4'>
@@ -25,7 +25,7 @@ function App() {
           <BudgetCard name={'Freak Nik'} amount={90000} max={15000}/>
           </div>
         </Container>
-        <AddBudgetModal show="true"/>
+        <AddBudgetModal show/>
     </>
   );
 }
