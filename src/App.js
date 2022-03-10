@@ -2,8 +2,10 @@ import Container from "react-bootstrap/Container";
 import { Button, Stack } from "react-bootstrap";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
+import { useState } from "react";
 
 function App() {
+  const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   return (
     <>
         {/*my gives mergin at top and bottom of page*/}
@@ -13,7 +15,7 @@ function App() {
             {/*  me sticks it to the left side of the screen*/}
             <h1 className='me-auto'>Budgets</h1>
             {/*  variant gives color*/}
-            <Button variant='primary'>Add Budget</Button>
+            <Button variant='primary' onClick={() => setShowAddBudgetModal(true)}>Add Budget</Button>
             <Button variant='outline-primary'>Add Expense</Button>
           </Stack>
           <div style={{
@@ -25,7 +27,7 @@ function App() {
           <BudgetCard name={'Freak Nik'} amount={90000} max={15000}/>
           </div>
         </Container>
-        <AddBudgetModal show/>
+        <AddBudgetModal show={showAddBudgetModal} handleClose={() => {setShowAddBudgetModal(false)}}/>
     </>
   );
 }
