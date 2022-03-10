@@ -3,14 +3,16 @@ import { Button, Stack } from "react-bootstrap";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
 import { useState } from "react";
-import { useBudgets } from "./contexts/BudgetsContexts";
+import {UNCATEGORIZED_BUDGET_ID, useBudgets} from "./contexts/BudgetsContexts";
 import AddExpenseModal from "./components/AddExpenseModal";
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
 import TotalBudgetCard from "./components/TotalBudgetCard";
+import ViewExpensesModal from "./components/ViewExpensesModal";
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const { budgets, getBudgetExpenses } = useBudgets();
 
@@ -46,10 +48,14 @@ function App() {
                       amount={amount}
                       max={budget.max}
                       onAddExpenseClick={() => openAddExpenseModal(budget.id)}
+                      onViewExpenseClick={() => setViewExpensesModalBudgetId(budget.id)}
                   />
               )
           })}
-          <UncategorizedBudgetCard />
+          <UncategorizedBudgetCard
+              onAddExpenseClick={openAddExpenseModal}
+              onViewExpenseClick={() => setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID)}
+          />
           <TotalBudgetCard />
           </div>
         </Container>
@@ -61,6 +67,10 @@ function App() {
             show={showAddExpenseModal}
             defaultBudgetId={addExpenseModalBudgetId}
             handleClose={() => setShowAddExpenseModal(false)}
+        />
+        <ViewExpensesModal
+            budgetId={viewExpensesModalBudgetId}
+            handleClose={() => setViewExpensesModalBudgetId()}
         />
     </>
   );
