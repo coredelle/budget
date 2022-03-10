@@ -3,9 +3,12 @@ import { Button, Stack } from "react-bootstrap";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
 import { useState } from "react";
+import { useBudgets } from "./contexts/BudgetsContexts";
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
+  const { budgets, getBudgetExpenses } = useBudgets();
+
   return (
     <>
         {/*my gives mergin at top and bottom of page*/}
@@ -24,7 +27,17 @@ function App() {
               gap: '1rem',
               alignItems: 'flex-start'
           }}>
-          <BudgetCard name={'Freak Nik'} amount={90000} max={15000}/>
+          {budgets.map(budget => {
+              const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0);
+              return (
+                  <BudgetCard
+                      key={budget.id}
+                      name={budget.name}
+                      amount={amount}
+                      max={budget.max}
+                  />
+              )
+          })}
           </div>
         </Container>
         <AddBudgetModal show={showAddBudgetModal} handleClose={() => {setShowAddBudgetModal(false)}}/>
